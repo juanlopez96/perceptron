@@ -61,10 +61,10 @@ public class Perceptron {
         
         f= new functions(training);
         f.setWeight();
-        f.calculate();
+        f.calculate(f.getWeight());
         
-        
-        
+        System.out.println("Comprobar");
+        f.calculate(f.getWeight());
     }
     
 }
