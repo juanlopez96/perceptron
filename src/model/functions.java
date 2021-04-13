@@ -30,13 +30,13 @@ public class functions {
         this.training_model = training_model;
         this.random = new Random();
         this.learning_coefficent = this.random.nextDouble();
-        this.threshold = this.random.nextDouble();
+        this.threshold = (Math.random() * (max - min) + min);
         this.weight = new ArrayList<>();
         System.out.println(this.learning_coefficent + " -- " + this.threshold);
     }
 
     public void setWeight() {
-        //Arreglar
+
         this.training_model.get(0).getParameter().forEach(x -> {
             this.weight.add((Math.random() * (max - min) + min));
         });
