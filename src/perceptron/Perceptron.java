@@ -5,6 +5,7 @@
  */
 package perceptron;
 
+import controller.indexController;
 import java.util.ArrayList;
 import java.util.List;
 import model.functions;
@@ -21,50 +22,17 @@ public class Perceptron {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        functions f;
-        List<trainingModel> training = new ArrayList<>();
-        trainingModel tr = new trainingModel();
-        List<Integer> param = new ArrayList<>();
-        param.add(1);
-        param.add(1);
-        int expected_result = 1;
-        tr.setParameter(param);
-        tr.setExpected_result(expected_result);
-        training.add(tr);
+        /*functions f;
         
-        tr = new trainingModel();
-        param = new ArrayList<>();
-        param.add(1);
-        param.add(0);
-        expected_result = 0;
-        tr.setParameter(param);
-        tr.setExpected_result(expected_result);
-        training.add(tr);
-        
-        tr = new trainingModel();
-        param = new ArrayList<>();
-        param.add(0);
-        param.add(1);
-        expected_result = 0;
-        tr.setParameter(param);
-        tr.setExpected_result(expected_result);
-        training.add(tr);
-        
-        tr = new trainingModel();
-        param = new ArrayList<>();
-        param.add(0);
-        param.add(0);
-        expected_result = 0;
-        tr.setParameter(param);
-        tr.setExpected_result(expected_result);
-        training.add(tr);
         
         f= new functions(training);
         f.setWeight();
         f.calculate(f.getWeight());
         
         System.out.println("Comprobar");
-        f.calculate(f.getWeight());
+        f.calculate(f.getWeight());*/
+        indexController index = new indexController();
+        
     }
     
 }
