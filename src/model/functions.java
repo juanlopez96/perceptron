@@ -29,6 +29,7 @@ public class functions {
     public ArrayList<allProcess> allprocess = new ArrayList<allProcess>();
     public allProcess process = new allProcess();
     private Object[][] data;
+    public int funcres;
     public functions(List<trainingModel> training_model) {
         this.training_model = training_model;
         this.random = new Random();
@@ -40,7 +41,7 @@ public class functions {
         this.threshold = Double.parseDouble(aux);
         this.weight = new ArrayList<>();
         this.setWeight();
-        System.out.println(this.learning_coefficent + " -- " + this.threshold);
+        //System.out.println(this.learning_coefficent + " -- " + this.threshold);
     }
 
     public void setWeight() {
@@ -52,7 +53,15 @@ public class functions {
         });
 
     }
-
+    public void setWeight(List<Double> weight){
+        this.weight = weight;
+    }
+    public void setLearningCoefficent(double learning_coefficent){
+        this.learning_coefficent = learning_coefficent;
+    }
+    public void setThreshold(double threshold){
+        this.threshold = threshold;
+    }
     public List<Double> getWeight() {
         return this.weight;
     }
@@ -85,6 +94,7 @@ public class functions {
         process.setY("" + this.evaluate_function);
         process.setLearning_coefficent("" + this.learning_coefficent);
         int fx = this.evaluate_function > 0 ? 1 : 0;
+        
         return fx;
     }
 
@@ -104,6 +114,7 @@ public class functions {
 
                 iteration++;
                 int fx = evaluate(subcont);
+                
                 process.setIteration("" + iteration);
                 process.setFx("" + fx);
                 this.bias = this.training_model.get(subcont).getExpected_Result() - fx;
@@ -173,5 +184,8 @@ public class functions {
     }
     public void resetData (){
         allprocess = new ArrayList<>();
+    }
+    public void setTrainingModel(List<trainingModel> training_model){
+        this.training_model = training_model;
     }
 }
