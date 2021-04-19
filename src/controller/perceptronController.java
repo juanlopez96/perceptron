@@ -156,23 +156,28 @@ public class perceptronController implements ActionListener {
             System.out.println("Here");
             ArrayList<Integer> inputs = new ArrayList<>();
             try {
+                if ((Integer.parseInt(this.view.testFirstInput.getText()) == 0 || Integer.parseInt(this.view.testFirstInput.getText()) == 1)
+                        && (Integer.parseInt(this.view.testSecondInput.getText()) ==0 || Integer.parseInt(this.view.testSecondInput.getText())==1))
+                         {
+                    inputs.add(Integer.parseInt(this.view.testFirstInput.getText()));
+                    inputs.add(Integer.parseInt(this.view.testSecondInput.getText()));
+                    ArrayList<trainingModel> testmodel = new ArrayList<>();
+                    trainingModel testAux = new trainingModel();
+                    testAux.setParameter(inputs);
+                    testmodel.add(testAux);
 
-                inputs.add(Integer.parseInt(this.view.testFirstInput.getText()));
-                inputs.add(Integer.parseInt(this.view.testSecondInput.getText()));
-                ArrayList<trainingModel> testmodel = new ArrayList<>();
-                trainingModel testAux = new trainingModel();
-                testAux.setParameter(inputs);
-                testmodel.add(testAux);
-
-                functions testM = new functions(testmodel);
-                //testM.setWeight(finalWeight);
-                testM.setLearningCoefficent(learning_coefficent);
-                testM.setThreshold(threshold);
-                testM.setTrainingModel(testmodel);
-                testM.setWeight(finalWeight);
-                this.view.testResult.setText("" + testM.evaluate(0));
+                    functions testM = new functions(testmodel);
+                    //testM.setWeight(finalWeight);
+                    testM.setLearningCoefficent(learning_coefficent);
+                    testM.setThreshold(threshold);
+                    testM.setTrainingModel(testmodel);
+                    testM.setWeight(finalWeight);
+                    this.view.testResult.setText("" + testM.evaluate(0));
+                }else{
+                    JOptionPane.showMessageDialog(this.view, "Las variables de las entradas deben ser 0 o 1", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Tipo de dato erroneo", "Error", JOptionPane.ERROR);
+                JOptionPane.showMessageDialog(this.view, "Tipo de dato erroneo", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
