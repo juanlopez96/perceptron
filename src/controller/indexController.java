@@ -31,7 +31,7 @@ public class indexController implements ActionListener {
         this.index.andButton.addActionListener(this);
         this.index.andOption.addActionListener(this);
         try {
-            img = new ImageIcon((this.getClass().getResource("/Images/ImagenPerceptron.jpg"))).getImage();
+            img = new ImageIcon((this.getClass().getResource("/Images/ImagenPerceptron1.jpg"))).getImage();
             Image dim = img.getScaledInstance(this.index.background.getWidth(), this.index.background.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dim);
             this.index.background.setIcon(imageIcon);
