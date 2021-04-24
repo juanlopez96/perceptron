@@ -20,6 +20,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import model.functions;
 import model.trainingModel;
+import view.indexView;
 import view.perceptronView;
 
 /**
@@ -37,7 +38,7 @@ public class perceptronController implements ActionListener {
     double learning_coefficent;
     double threshold;
     List<Double> finalWeight;
-
+    indexView index;
     public perceptronController() {
         this.view = new perceptronView();
         this.view.setResizable(false);
@@ -59,7 +60,7 @@ public class perceptronController implements ActionListener {
         this.view.validateButton.addActionListener(this);
         this.view.validateButton.setEnabled(false);
         this.view.test.addActionListener(this);
-
+        this.view.backButton.addActionListener(this);
         this.view.x1Label.setVisible(false);
         this.view.x2Label.setVisible(false);
         this.view.testFirstInput.setVisible(false);
@@ -179,6 +180,9 @@ public class perceptronController implements ActionListener {
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this.view, "Tipo de dato erroneo", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }else if(e.getSource() == this.view.backButton){
+            index.setVisible(true);
+            this.view.dispose();
         }
     }
 
@@ -202,4 +206,7 @@ public class perceptronController implements ActionListener {
         this.func.resetData();
     }
 
+    public void setIndexView(indexView index){
+        this.index = index;
+    }
 }

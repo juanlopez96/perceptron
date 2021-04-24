@@ -46,6 +46,7 @@ public class indexController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.index.andButton || e.getSource() == this.index.andOption) {
             perceptronController controller = new perceptronController();
+            controller.setIndexView(this.index);
             this.index.dispose();
         }
         else if(e.getSource() == this.index.credits){
