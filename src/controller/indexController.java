@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import view.indexView;
 import view.perceptronView;
 
@@ -30,6 +31,7 @@ public class indexController implements ActionListener {
         this.index.setVisible(true);
         this.index.andButton.addActionListener(this);
         this.index.andOption.addActionListener(this);
+        this.index.credits.addActionListener(this);
         try {
             img = new ImageIcon((this.getClass().getResource("/Images/ImagenPerceptron1.jpg"))).getImage();
             Image dim = img.getScaledInstance(this.index.background.getWidth(), this.index.background.getHeight(), Image.SCALE_SMOOTH);
@@ -45,6 +47,11 @@ public class indexController implements ActionListener {
         if (e.getSource() == this.index.andButton || e.getSource() == this.index.andOption) {
             perceptronController controller = new perceptronController();
             this.index.dispose();
+        }
+        else if(e.getSource() == this.index.credits){
+            JOptionPane.showMessageDialog(null, "Desarrollado por:\n- Lisceth Valentina Ávlina Gómez\n"
+                    + "- Yeiny Paola Calderón Portela\n- María Alejandra Lavado Barbosa\n- Yessica Alexandra Malaver Gómez\n"
+                    + "- Juan Camilo López Ochoa\n\n Presentado a: Esaú Palomá Parra");
         }
         
     }

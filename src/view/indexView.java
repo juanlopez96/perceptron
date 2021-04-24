@@ -34,7 +34,7 @@ public class indexView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         andOption = new javax.swing.JMenuItem();
         orOption = new javax.swing.JMenuItem();
-        credits = new javax.swing.JMenu();
+        credits = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +44,7 @@ public class indexView extends javax.swing.JFrame {
 
         background.setText("jLabel1");
 
-        jMenu1.setText("Compuerta");
+        jMenu1.setText("Inicio");
 
         andOption.setText("AND");
         jMenu1.add(andOption);
@@ -57,10 +57,10 @@ public class indexView extends javax.swing.JFrame {
         });
         jMenu1.add(orOption);
 
-        jMenuBar1.add(jMenu1);
-
         credits.setText("Créditos");
-        jMenuBar1.add(credits);
+        jMenu1.add(credits);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,7 +134,7 @@ public class indexView extends javax.swing.JFrame {
     public javax.swing.JButton andButton;
     public javax.swing.JMenuItem andOption;
     public javax.swing.JLabel background;
-    public javax.swing.JMenu credits;
+    public javax.swing.JMenuItem credits;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JButton orButton;
