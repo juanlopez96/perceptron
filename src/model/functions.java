@@ -21,21 +21,23 @@ public class functions {
     private double error;
     private double learning_coefficent;
     private Random random;
+    //si se desea disminuir los intervalos de los pesos y el umbral el min usado se comenta y el otro se descomenta
     private final int max = 1;
     private final int min = -1;
+    //private final double min=0.5;
     private int weightCont = 0;
     private double evaluate_function = 0;
     String aux;
     public ArrayList<allProcess> allprocess = new ArrayList<allProcess>();
     public allProcess process = new allProcess();
     private Object[][] data;
-    public int funcres;
     public functions(List<trainingModel> training_model) {
         this.training_model = training_model;
         this.random = new Random();
         aux = String.format("%.2f", this.random.nextDouble());
         aux = aux.replaceAll(",", ".");
         this.learning_coefficent = Double.parseDouble(aux);
+        //si se desea que el umbral (threshold) sea de 0 a 1 se comentan las siguientes dos lineas de aux
         aux = String.format("%.2f", (Math.random() * (max - min) + min));
         aux = aux.replaceAll(",", ".");
         this.threshold = Double.parseDouble(aux);
