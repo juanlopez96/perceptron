@@ -18,7 +18,7 @@ public class functions {
     private List<trainingModel> training_model;
     private List<Double> weight;
     private double threshold;
-    private double bias;
+    private double error;
     private double learning_coefficent;
     private Random random;
     private final int max = 1;
@@ -117,12 +117,12 @@ public class functions {
                 
                 process.setIteration("" + iteration);
                 process.setFx("" + fx);
-                this.bias = this.training_model.get(subcont).getExpected_Result() - fx;
-                process.setBias("" + this.bias);
+                this.error = this.training_model.get(subcont).getExpected_Result() - fx;
+                process.setError("" + this.error);
                 this.weightCont = 0;
-                if (this.bias != 0) {
+                if (this.error != 0) {
                     this.training_model.get(subcont).getParameter().forEach(x -> {
-                        aux = String.format("%.2f", (this.learning_coefficent * this.bias * x));
+                        aux = String.format("%.2f", (this.learning_coefficent * this.error * x));
                         aux = aux.replaceAll(",", ".");
                         double weight_variation = Double.parseDouble(aux);
                         process.weight_variation[weightCont] = "" + weight_variation;
@@ -133,7 +133,7 @@ public class functions {
                         this.weight.set(this.weightCont, newWeight);
                         this.weightCont += 1;
                     });
-                    aux = String.format("%.2f", this.threshold - this.learning_coefficent * this.bias);
+                    aux = String.format("%.2f", this.threshold - this.learning_coefficent * this.error);
                     aux = aux.replaceAll(",", ".");
                     this.threshold = Double.parseDouble(aux);
                     process.setNew_threshold("" + this.threshold);
@@ -149,9 +149,9 @@ public class functions {
                     });
                 }
                 System.out.println("Patron: " + (subcont + 1) + "\nIteracion: " + (iteration) + "\nError: "
-                        + (this.bias) + "\nFuncion: " + this.evaluate_function + "\nFuncion evaluada: " + fx + "\n-----------");
+                        + (this.error) + "\nFuncion: " + this.evaluate_function + "\nFuncion evaluada: " + fx + "\n-----------");
                 allprocess.add(process);
-            } while (this.bias != 0);
+            } while (this.error != 0);
             subcont += 1;
             if (subcont > this.training_model.size() - 1) {
                 subcont = 0;
@@ -170,7 +170,7 @@ public class functions {
             data[i][7] = allprocess.get(i).getY();
             data[i][8] = allprocess.get(i).getFx();
             data[i][9] = allprocess.get(i).getLearning_coefficent();
-            data[i][10] = allprocess.get(i).getBias();
+            data[i][10] = allprocess.get(i).getError();
             data[i][11] = allprocess.get(i).weight_variation[0];
             data[i][12] = allprocess.get(i).weight_variation[1];
             data[i][13] = allprocess.get(i).new_weight[0];

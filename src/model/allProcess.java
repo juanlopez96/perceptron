@@ -18,7 +18,7 @@ public class allProcess {
     String y;
     String fx;
     String learning_coefficent;
-    String bias;
+    String error;
     String []weight_variation;
     String []new_weight;
     String new_threshold;
@@ -79,12 +79,12 @@ public class allProcess {
         this.learning_coefficent = learning_coefficent;
     }
 
-    public String getBias() {
-        return bias;
+    public String getError() {
+        return error;
     }
 
-    public void setBias(String bias) {
-        this.bias = bias;
+    public void setError(String error) {
+        this.error = error;
     }
 
     public String getNew_threshold() {
