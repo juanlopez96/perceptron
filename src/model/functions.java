@@ -21,10 +21,10 @@ public class functions {
     private double error;
     private double learning_coefficent;
     private Random random;
-    //si se desea disminuir los intervalos de los pesos y el umbral el min usado se comenta y el otro se descomenta
+    /*si se desea disminuir los intervalos de los pesos y el umbral el min usado se comenta y el otro se descomenta*/
     private final int max = 1;
     private final int min = -1;
-    //private final double min=0.5;
+    /*private final double min=0.5;*/
     private int weightCont = 0;
     private double evaluate_function = 0;
     String aux;
@@ -34,20 +34,23 @@ public class functions {
     public functions(List<trainingModel> training_model) {
         this.training_model = training_model;
         this.random = new Random();
+        //Valor del coeficiente de aprendizaje
         aux = String.format("%.2f", this.random.nextDouble());
         aux = aux.replaceAll(",", ".");
         this.learning_coefficent = Double.parseDouble(aux);
-        //si se desea que el umbral (threshold) sea de 0 a 1 se comentan las siguientes dos lineas de aux
+        //Valor del umbral
+        /*si se desea que el umbral (threshold) sea de 0 a 1 se comentan las siguientes dos lineas de aux*/
         aux = String.format("%.2f", (Math.random() * (max - min) + min));
         aux = aux.replaceAll(",", ".");
         this.threshold = Double.parseDouble(aux);
         this.weight = new ArrayList<>();
+        //Valor de los n pesos con respecto a los n parámetros
         this.setWeight();
         //System.out.println(this.learning_coefficent + " -- " + this.threshold);
     }
 
     public void setWeight() {
-
+        //Para cada parametro se genera su respectivo peso
         this.training_model.get(0).getParameter().forEach(x -> {
             aux = String.format("%.2f", (Math.random() * (max - min) + min));
             aux = aux.replaceAll(",", ".");
@@ -80,54 +83,56 @@ public class functions {
         process = new allProcess();
         process.setPatron(""+(subcont+1));
         this.weightCont = 0;
+        //Para cada parametro se evalua y se suma al total de la funcion (Funcion de activacion)
         this.training_model.get(subcont).getParameter().forEach(x -> {
             //System.out.println(x);
             process.x[this.weightCont] = x.toString();
             process.weight[this.weightCont] = this.weight.get(this.weightCont).toString();
-
+            
             this.evaluate_function += (x * this.weight.get(this.weightCont));
 
             this.weightCont += 1;
         });
         process.setTheshold("" + this.threshold);
         process.setD("" + this.training_model.get(subcont).getExpected_Result());
+        //A la sumatoria del parametro xi * el peso pi se le resta el umbral
         this.evaluate_function -= this.threshold;
         this.evaluate_function = Double.parseDouble((String.format("%.2f", this.evaluate_function)).replaceAll(",", "."));
         process.setY("" + this.evaluate_function);
         process.setLearning_coefficent("" + this.learning_coefficent);
+        //Si el valor de la funcion evaluada es mayor a 0, devuelve un 1, de lo contrato devuelve 0
         int fx = this.evaluate_function > 0 ? 1 : 0;
         
         return fx;
     }
 
     public void calculate(List<Double> weight) {
-        
-
         this.weight = weight;
         int cont = this.training_model.size();
         int iteration = 0;
         int subcont = 0;
-
         while (cont > 0) {
             this.evaluate_function = 0;
-            
-            do {
-                
-
+            do {              
                 iteration++;
-                int fx = evaluate(subcont);
-                
+                //Se obtiene el valor de la funcion evaluada para el patron subcont
+                int fx = evaluate(subcont);               
                 process.setIteration("" + iteration);
                 process.setFx("" + fx);
+                //Se calcula el error existente
                 this.error = this.training_model.get(subcont).getExpected_Result() - fx;
                 process.setError("" + this.error);
                 this.weightCont = 0;
+                //Si el valor del error es diferente de 0, se debe recalcular los pesos y el umbral
                 if (this.error != 0) {
+                    //Se empieza a recorrer cada uno de los patrones
                     this.training_model.get(subcont).getParameter().forEach(x -> {
+                        //Se calcula la variacion de los pesos
                         aux = String.format("%.2f", (this.learning_coefficent * this.error * x));
                         aux = aux.replaceAll(",", ".");
                         double weight_variation = Double.parseDouble(aux);
                         process.weight_variation[weightCont] = "" + weight_variation;
+                        //Se define el nuevo valor de los pesos
                         aux = String.format("%.2f", this.weight.get(this.weightCont) + weight_variation);
                         aux = aux.replaceAll(",", ".");
                         double newWeight = Double.parseDouble(aux);
@@ -135,6 +140,7 @@ public class functions {
                         this.weight.set(this.weightCont, newWeight);
                         this.weightCont += 1;
                     });
+                    //Se calcula el nuevo umbral
                     aux = String.format("%.2f", this.threshold - this.learning_coefficent * this.error);
                     aux = aux.replaceAll(",", ".");
                     this.threshold = Double.parseDouble(aux);
@@ -142,6 +148,7 @@ public class functions {
                     cont = this.training_model.size();
                 }
                 else{
+                    //Si el error es 0, permanece constante el umbral y los pesos
                     this.weightCont = 0;
                     this.training_model.get(subcont).getParameter().forEach(x -> {
                         process.weight_variation[weightCont] = "0";

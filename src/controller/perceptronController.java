@@ -68,7 +68,7 @@ public class perceptronController implements ActionListener {
         this.view.testResult.setVisible(false);
         this.view.test.setVisible(false);
     }
-
+    //Se definen los parametros y el valor esperado para cada patron
     private void setTrainningModel() {
         training = new ArrayList<>();
         trainingModel tr = new trainingModel();
