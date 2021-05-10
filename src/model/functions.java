@@ -29,11 +29,15 @@ public class functions {
     private double evaluate_function = 0;
     String aux;
     public ArrayList<allProcess> allprocess = new ArrayList<allProcess>();
-    public allProcess process = new allProcess();
+    public allProcess process;
     private Object[][] data;
-    public functions(List<trainingModel> training_model) {
+    private int entryNumber;
+
+    public functions(List<trainingModel> training_model, int entryNumber) {
         this.training_model = training_model;
         this.random = new Random();
+        this.entryNumber = entryNumber;
+        this.process = new allProcess(this.entryNumber);
         //Valor del coeficiente de aprendizaje
         aux = String.format("%.2f", this.random.nextDouble());
         aux = aux.replaceAll(",", ".");
@@ -58,15 +62,19 @@ public class functions {
         });
 
     }
-    public void setWeight(List<Double> weight){
+
+    public void setWeight(List<Double> weight) {
         this.weight = weight;
     }
-    public void setLearningCoefficent(double learning_coefficent){
+
+    public void setLearningCoefficent(double learning_coefficent) {
         this.learning_coefficent = learning_coefficent;
     }
-    public void setThreshold(double threshold){
+
+    public void setThreshold(double threshold) {
         this.threshold = threshold;
     }
+
     public List<Double> getWeight() {
         return this.weight;
     }
@@ -79,16 +87,16 @@ public class functions {
         return this.threshold;
     }
 
-    public int evaluate(int subcont) {
-        process = new allProcess();
-        process.setPatron(""+(subcont+1));
+    public int evaluate(int subcont, int entryNumber) {
+        process = new allProcess(entryNumber);
+        process.setPatron("" + (subcont + 1));
         this.weightCont = 0;
         //Para cada parametro se evalua y se suma al total de la funcion (Funcion de activacion)
         this.training_model.get(subcont).getParameter().forEach(x -> {
             //System.out.println(x);
             process.x[this.weightCont] = x.toString();
             process.weight[this.weightCont] = this.weight.get(this.weightCont).toString();
-            
+
             this.evaluate_function += (x * this.weight.get(this.weightCont));
 
             this.weightCont += 1;
@@ -102,7 +110,7 @@ public class functions {
         process.setLearning_coefficent("" + this.learning_coefficent);
         //Si el valor de la funcion evaluada es mayor a 0, devuelve un 1, de lo contrato devuelve 0
         int fx = this.evaluate_function > 0 ? 1 : 0;
-        
+
         return fx;
     }
 
@@ -113,10 +121,10 @@ public class functions {
         int subcont = 0;
         while (cont > 0) {
             this.evaluate_function = 0;
-            do {              
+            do {
                 iteration++;
                 //Se obtiene el valor de la funcion evaluada para el patron subcont
-                int fx = evaluate(subcont);               
+                int fx = evaluate(subcont, this.entryNumber);
                 process.setIteration("" + iteration);
                 process.setFx("" + fx);
                 //Se calcula el error existente
@@ -146,14 +154,13 @@ public class functions {
                     this.threshold = Double.parseDouble(aux);
                     process.setNew_threshold("" + this.threshold);
                     cont = this.training_model.size();
-                }
-                else{
+                } else {
                     //Si el error es 0, permanece constante el umbral y los pesos
                     this.weightCont = 0;
                     this.training_model.get(subcont).getParameter().forEach(x -> {
                         process.weight_variation[weightCont] = "0";
-                        process.new_weight[weightCont] = ""+this.weight.get(weightCont);
-                        process.setNew_threshold(""+this.threshold);
+                        process.new_weight[weightCont] = "" + this.weight.get(weightCont);
+                        process.setNew_threshold("" + this.threshold);
                         this.weightCont++;
                     });
                 }
@@ -167,34 +174,66 @@ public class functions {
             }
             cont--;
         }
-        data = new Object[allprocess.size()][17];
+        cont = 0;
+        data = new Object[allprocess.size()][9 + (entryNumber * 4)];
         for (int i = 0; i < allprocess.size(); i++) {
-            data[i][0] = allprocess.get(i).getPatron();
-            data[i][1] = allprocess.get(i).x[0];
-            data[i][2] = allprocess.get(i).x[1];
-            data[i][3] = allprocess.get(i).weight[0];
-            data[i][4] = allprocess.get(i).weight[1];
-            data[i][5] = allprocess.get(i).getTheshold();
-            data[i][6] = allprocess.get(i).getD();
-            data[i][7] = allprocess.get(i).getY();
-            data[i][8] = allprocess.get(i).getFx();
-            data[i][9] = allprocess.get(i).getLearning_coefficent();
-            data[i][10] = allprocess.get(i).getError();
-            data[i][11] = allprocess.get(i).weight_variation[0];
-            data[i][12] = allprocess.get(i).weight_variation[1];
-            data[i][13] = allprocess.get(i).new_weight[0];
-            data[i][14] = allprocess.get(i).new_weight[1];
-            data[i][15] = allprocess.get(i).getNew_threshold();
-            data[i][16] = allprocess.get(i).getIteration();
+            cont = 0;
+            while (cont < (9 + (entryNumber * 4))) {
+                if (cont == 0) {
+                    data[i][cont] = allprocess.get(i).getPatron();
+                    cont++;
+                } else if (cont <= entryNumber * 2) {
+                    for (int j = 0; j < allprocess.get(i).x.length; j++) {
+                        data[i][cont] = allprocess.get(i).x[j];
+                        cont++;
+                    }
+                    for (int j = 0; j < allprocess.get(i).weight.length; j++) {
+                        data[i][cont] = allprocess.get(i).weight[j];
+                        cont++;
+                    }
+                } else if (cont >= (entryNumber * 2) + 1 && cont < (entryNumber * 2) + 7) {
+                    data[i][cont] = allprocess.get(i).getTheshold();
+                    cont++;
+                    data[i][cont] = allprocess.get(i).getD();
+                    cont++;
+                    data[i][cont] = allprocess.get(i).getY();
+                    cont++;
+                    data[i][cont] = allprocess.get(i).getFx();
+                    cont++;
+                    data[i][cont] = allprocess.get(i).getLearning_coefficent();
+                    cont++;
+                    data[i][cont] = allprocess.get(i).getError();
+                    cont++;
+                } else if (cont >= (entryNumber * 2) + 7 && cont < (entryNumber * 4) + 7) {
+                    for (int j = 0; j < allprocess.get(i).weight_variation.length; j++) {
+                        data[i][cont] = allprocess.get(i).weight_variation[j];
+                        cont++;
+                    }
+                    for (int j = 0; j < allprocess.get(i).new_weight.length; j++) {
+                        data[i][cont] = allprocess.get(i).new_weight[j];
+                        cont++;
+                    }
+                } else if (cont >= (9 + (entryNumber * 4)) - 2 && cont <(9 + (entryNumber * 4))-1) {
+                    data[i][cont] = allprocess.get(i).getNew_threshold();
+                    cont++;
+                } else {
+                    data[i][cont] = allprocess.get(i).getIteration();
+                    cont++;
+                }
+
+            }
         }
     }
-    public Object[][] getData(){
+
+    public Object[][] getData() {
         return data;
     }
-    public void resetData (){
+
+    public void resetData() {
         allprocess = new ArrayList<>();
     }
-    public void setTrainingModel(List<trainingModel> training_model){
+
+    public void setTrainingModel(List<trainingModel> training_model) {
         this.training_model = training_model;
     }
 }

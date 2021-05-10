@@ -45,6 +45,7 @@ public class perceptronView extends javax.swing.JFrame {
         test = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1100, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         evaluateButton.setText("Evaluar");
@@ -76,9 +77,10 @@ public class perceptronView extends javax.swing.JFrame {
         threshold.setText("0");
         getContentPane().add(threshold, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 225, -1, -1));
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(530, 160));
-        jPanel1.setPreferredSize(new java.awt.Dimension(530, 200));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 366, 520, -1));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1000, 200));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 200));
+        jPanel1.setLayout(new java.awt.GridLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 1000, 200));
 
         testSecondInput.setText("0");
         getContentPane().add(testSecondInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 32, -1));

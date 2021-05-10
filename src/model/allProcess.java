@@ -24,11 +24,11 @@ public class allProcess {
     String new_threshold;
     String iteration;
     
-    public allProcess(){
-        x = new String[2];
-        weight_variation = new String[2];
-        new_weight = new String[2];
-        weight = new String[2];
+    public allProcess(int entryNumber){
+        x = new String[entryNumber];
+        weight_variation = new String[entryNumber];
+        new_weight = new String[entryNumber];
+        weight = new String[entryNumber];
     }
 
     public String getPatron() {
