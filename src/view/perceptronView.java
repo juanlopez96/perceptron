@@ -30,19 +30,13 @@ public class perceptronView extends javax.swing.JFrame {
         evaluateButton = new javax.swing.JButton();
         validateButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        secondWeight = new javax.swing.JLabel();
         setVarButton = new javax.swing.JButton();
         learningCoefficent = new javax.swing.JLabel();
-        firstWeight = new javax.swing.JLabel();
         threshold = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        testSecondInput = new javax.swing.JTextField();
-        testFirstInput = new javax.swing.JTextField();
-        background = new javax.swing.JLabel();
-        x2Label = new javax.swing.JLabel();
-        x1Label = new javax.swing.JLabel();
-        testResult = new javax.swing.JLabel();
         test = new javax.swing.JButton();
+        gate = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 500));
@@ -57,9 +51,6 @@ public class perceptronView extends javax.swing.JFrame {
         backButton.setText("Volver");
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 11, 105, -1));
 
-        secondWeight.setText("0");
-        getContentPane().add(secondWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 225, -1, -1));
-
         setVarButton.setText("Inicar Variables");
         setVarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,42 +60,22 @@ public class perceptronView extends javax.swing.JFrame {
         getContentPane().add(setVarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         learningCoefficent.setText("0");
-        getContentPane().add(learningCoefficent, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 265, -1, -1));
-
-        firstWeight.setText("0");
-        getContentPane().add(firstWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
+        getContentPane().add(learningCoefficent, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 40, -1));
 
         threshold.setText("0");
-        getContentPane().add(threshold, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 225, -1, -1));
+        getContentPane().add(threshold, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 40, -1));
 
         jPanel1.setMaximumSize(new java.awt.Dimension(1000, 200));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 200));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 1000, 200));
 
-        testSecondInput.setText("0");
-        getContentPane().add(testSecondInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 32, -1));
-
-        testFirstInput.setText("0");
-        testFirstInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                testFirstInputActionPerformed(evt);
-            }
-        });
-        getContentPane().add(testFirstInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 32, -1));
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 543, 279));
-
-        x2Label.setText("x2");
-        getContentPane().add(x2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
-
-        x1Label.setText("x1");
-        getContentPane().add(x1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
-
-        testResult.setText("0");
-        getContentPane().add(testResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
-
         test.setText("Probar");
-        getContentPane().add(test, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, -1, -1));
+        getContentPane().add(test, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
+
+        gate.setText("jLabel1");
+        getContentPane().add(gate, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 210, 110));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1020, 279));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,10 +83,6 @@ public class perceptronView extends javax.swing.JFrame {
     private void setVarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setVarButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_setVarButtonActionPerformed
-
-    private void testFirstInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testFirstInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_testFirstInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,18 +123,12 @@ public class perceptronView extends javax.swing.JFrame {
     public javax.swing.JButton backButton;
     public javax.swing.JLabel background;
     public javax.swing.JButton evaluateButton;
-    public javax.swing.JLabel firstWeight;
+    public javax.swing.JLabel gate;
     public javax.swing.JPanel jPanel1;
     public javax.swing.JLabel learningCoefficent;
-    public javax.swing.JLabel secondWeight;
     public javax.swing.JButton setVarButton;
     public javax.swing.JButton test;
-    public javax.swing.JTextField testFirstInput;
-    public javax.swing.JLabel testResult;
-    public javax.swing.JTextField testSecondInput;
     public javax.swing.JLabel threshold;
     public javax.swing.JButton validateButton;
-    public javax.swing.JLabel x1Label;
-    public javax.swing.JLabel x2Label;
     // End of variables declaration//GEN-END:variables
 }

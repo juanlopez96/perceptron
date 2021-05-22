@@ -32,7 +32,7 @@ public class functions {
     public allProcess process;
     private Object[][] data;
     private int entryNumber;
-
+    boolean tol = false;
     public functions(List<trainingModel> training_model, int entryNumber) {
         this.training_model = training_model;
         this.random = new Random();
@@ -119,10 +119,15 @@ public class functions {
         int cont = this.training_model.size();
         int iteration = 0;
         int subcont = 0;
+        tol = false;
         while (cont > 0) {
             this.evaluate_function = 0;
             do {
                 iteration++;
+                if (iteration > 5000) {
+                    tol = true;
+                    break;
+                }
                 //Se obtiene el valor de la funcion evaluada para el patron subcont
                 int fx = evaluate(subcont, this.entryNumber);
                 process.setIteration("" + iteration);
@@ -174,53 +179,54 @@ public class functions {
             }
             cont--;
         }
-        cont = 0;
-        data = new Object[allprocess.size()][9 + (entryNumber * 4)];
-        for (int i = 0; i < allprocess.size(); i++) {
+        if (tol == false) {
             cont = 0;
-            while (cont < (9 + (entryNumber * 4))) {
-                if (cont == 0) {
-                    data[i][cont] = allprocess.get(i).getPatron();
-                    cont++;
-                } else if (cont <= entryNumber * 2) {
-                    for (int j = 0; j < allprocess.get(i).x.length; j++) {
-                        data[i][cont] = allprocess.get(i).x[j];
+            data = new Object[allprocess.size()][9 + (entryNumber * 4)];
+            for (int i = 0; i < allprocess.size(); i++) {
+                cont = 0;
+                while (cont < (9 + (entryNumber * 4))) {
+                    if (cont == 0) {
+                        data[i][cont] = allprocess.get(i).getPatron();
+                        cont++;
+                    } else if (cont <= entryNumber * 2) {
+                        for (int j = 0; j < allprocess.get(i).x.length; j++) {
+                            data[i][cont] = allprocess.get(i).x[j];
+                            cont++;
+                        }
+                        for (int j = 0; j < allprocess.get(i).weight.length; j++) {
+                            data[i][cont] = allprocess.get(i).weight[j];
+                            cont++;
+                        }
+                    } else if (cont >= (entryNumber * 2) + 1 && cont < (entryNumber * 2) + 7) {
+                        data[i][cont] = allprocess.get(i).getTheshold();
+                        cont++;
+                        data[i][cont] = allprocess.get(i).getD();
+                        cont++;
+                        data[i][cont] = allprocess.get(i).getY();
+                        cont++;
+                        data[i][cont] = allprocess.get(i).getFx();
+                        cont++;
+                        data[i][cont] = allprocess.get(i).getLearning_coefficent();
+                        cont++;
+                        data[i][cont] = allprocess.get(i).getError();
+                        cont++;
+                    } else if (cont >= (entryNumber * 2) + 7 && cont < (entryNumber * 4) + 7) {
+                        for (int j = 0; j < allprocess.get(i).weight_variation.length; j++) {
+                            data[i][cont] = allprocess.get(i).weight_variation[j];
+                            cont++;
+                        }
+                        for (int j = 0; j < allprocess.get(i).new_weight.length; j++) {
+                            data[i][cont] = allprocess.get(i).new_weight[j];
+                            cont++;
+                        }
+                    } else if (cont >= (9 + (entryNumber * 4)) - 2 && cont < (9 + (entryNumber * 4)) - 1) {
+                        data[i][cont] = allprocess.get(i).getNew_threshold();
+                        cont++;
+                    } else {
+                        data[i][cont] = allprocess.get(i).getIteration();
                         cont++;
                     }
-                    for (int j = 0; j < allprocess.get(i).weight.length; j++) {
-                        data[i][cont] = allprocess.get(i).weight[j];
-                        cont++;
-                    }
-                } else if (cont >= (entryNumber * 2) + 1 && cont < (entryNumber * 2) + 7) {
-                    data[i][cont] = allprocess.get(i).getTheshold();
-                    cont++;
-                    data[i][cont] = allprocess.get(i).getD();
-                    cont++;
-                    data[i][cont] = allprocess.get(i).getY();
-                    cont++;
-                    data[i][cont] = allprocess.get(i).getFx();
-                    cont++;
-                    data[i][cont] = allprocess.get(i).getLearning_coefficent();
-                    cont++;
-                    data[i][cont] = allprocess.get(i).getError();
-                    cont++;
-                } else if (cont >= (entryNumber * 2) + 7 && cont < (entryNumber * 4) + 7) {
-                    for (int j = 0; j < allprocess.get(i).weight_variation.length; j++) {
-                        data[i][cont] = allprocess.get(i).weight_variation[j];
-                        cont++;
-                    }
-                    for (int j = 0; j < allprocess.get(i).new_weight.length; j++) {
-                        data[i][cont] = allprocess.get(i).new_weight[j];
-                        cont++;
-                    }
-                } else if (cont >= (9 + (entryNumber * 4)) - 2 && cont <(9 + (entryNumber * 4))-1) {
-                    data[i][cont] = allprocess.get(i).getNew_threshold();
-                    cont++;
-                } else {
-                    data[i][cont] = allprocess.get(i).getIteration();
-                    cont++;
                 }
-
             }
         }
     }
@@ -235,5 +241,8 @@ public class functions {
 
     public void setTrainingModel(List<trainingModel> training_model) {
         this.training_model = training_model;
+    }
+    public boolean getTol(){
+        return tol;
     }
 }
