@@ -11,19 +11,8 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="andOption">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AND"/>
+                <Property name="text" type="java.lang.String" value="Ejecutar"/>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="orOption">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="OR"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orOptionActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

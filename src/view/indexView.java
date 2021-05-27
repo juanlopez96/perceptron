@@ -32,7 +32,6 @@ public class indexView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         andOption = new javax.swing.JMenuItem();
-        orOption = new javax.swing.JMenuItem();
         credits = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,16 +42,8 @@ public class indexView extends javax.swing.JFrame {
 
         jMenu1.setText("Inicio");
 
-        andOption.setText("AND");
+        andOption.setText("Ejecutar");
         jMenu1.add(andOption);
-
-        orOption.setText("OR");
-        orOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                orOptionActionPerformed(evt);
-            }
-        });
-        jMenu1.add(orOption);
 
         credits.setText("Créditos");
         jMenu1.add(credits);
@@ -82,10 +73,6 @@ public class indexView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void orOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_orOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +117,5 @@ public class indexView extends javax.swing.JFrame {
     public javax.swing.JMenuItem credits;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    public javax.swing.JMenuItem orOption;
     // End of variables declaration//GEN-END:variables
 }
