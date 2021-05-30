@@ -20,7 +20,6 @@ import model.trainingModel;
 import view.indexView;
 import view.perceptronView;
 
-
 public class perceptronController implements ActionListener {
 
     private perceptronView view;
@@ -62,7 +61,7 @@ public class perceptronController implements ActionListener {
         this.view.backButton.addActionListener(this);
         this.view.test.setVisible(false);
         setTrainningModel();
-        
+
     }
 
     //Se definen los parametros y el valor esperado para cada patron
@@ -88,13 +87,13 @@ public class perceptronController implements ActionListener {
                 while (param < 0 || param > 1) {
                     try {
                         param = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el parametro " + (j + 1) + " del patron " + (i + 1)));
-                        params.add(param);
+
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "El valor debe ser 0 o 1", "Error", JOptionPane.ERROR_MESSAGE);
                         param = -1;
                     }
-                    
                 }
+                params.add(param);
             }
             while (expected_result < 0 || expected_result > 1) {
                 try {
@@ -119,7 +118,7 @@ public class perceptronController implements ActionListener {
             }
         }
         try {
-            img = new ImageIcon((this.getClass().getResource("/Images/"+setGate+".png"))).getImage();
+            img = new ImageIcon((this.getClass().getResource("/Images/" + setGate + ".png"))).getImage();
             Image dim = img.getScaledInstance(this.view.gate.getWidth(), this.view.gate.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dim);
             this.view.gate.setIcon(imageIcon);
@@ -184,7 +183,6 @@ public class perceptronController implements ActionListener {
             this.view.threshold.setText("" + this.func.getThreshold());
 
             this.view.evaluateButton.setEnabled(false);
-            
 
             this.view.test.setVisible(false);
             this.threshold = this.func.getThreshold();
