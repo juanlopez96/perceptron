@@ -219,7 +219,7 @@ public class functions {
                             data[i][cont] = allprocess.get(i).new_weight[j];
                             cont++;
                         }
-                    } else if (cont >= (9 + (entryNumber * 4)) - 2 && cont < (9 + (entryNumber * 4)) - 1) {
+                    } else if (cont >= (9 + (entryNumber * 4)) -2 && cont < (9 + (entryNumber * 4)) - 1) {
                         data[i][cont] = allprocess.get(i).getNew_threshold();
                         cont++;
                     } else {

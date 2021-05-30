@@ -96,11 +96,12 @@ public class perceptronController implements ActionListener {
                 while (param < 0 || param > 1) {
                     try {
                         param = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el parametro " + (j + 1) + " del patron " + (i + 1)));
+                        params.add(param);
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "El valor debe ser 0 o 1", "Error", JOptionPane.ERROR_MESSAGE);
                         param = -1;
                     }
-                    params.add(param);
+                    
                 }
             }
             while (expected_result < 0 || expected_result > 1) {
@@ -120,6 +121,7 @@ public class perceptronController implements ActionListener {
         while (!exist) {
             setGate = JOptionPane.showInputDialog(null, "Ingrese el nombre de la compuerta").toUpperCase();
             exist = Arrays.stream(checkGate).anyMatch(setGate::equals);
+
             if (!exist) {
                 JOptionPane.showMessageDialog(null, "El nombre ingresado no corresponde a una compuerta establecida", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
@@ -190,7 +192,7 @@ public class perceptronController implements ActionListener {
             this.view.threshold.setText("" + this.func.getThreshold());
 
             this.view.evaluateButton.setEnabled(false);
-            this.view.validateButton.setEnabled(true);
+            
 
             this.view.test.setVisible(false);
             this.threshold = this.func.getThreshold();
@@ -212,7 +214,7 @@ public class perceptronController implements ActionListener {
                         aux = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor del parametro " + (i + 1)));
                         inputs.add(aux);
                     } catch (Exception ex) {
-                        System.out.println(ex.toString());
+                        JOptionPane.showMessageDialog(null, "El valor ingresado debe ser númerico entre 0 y 1", "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
@@ -318,8 +320,10 @@ public class perceptronController implements ActionListener {
             this.view.jPanel1.repaint();
             this.view.repaint();
             this.func.resetData();
+            this.view.validateButton.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Los parametros ingresados no corresponden a una compuerta establecida", "Error", JOptionPane.ERROR_MESSAGE);
+            this.view.validateButton.setEnabled(false);
         }
     }
 
