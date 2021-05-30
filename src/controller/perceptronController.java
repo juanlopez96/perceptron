@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.BorderLayout;
@@ -25,10 +20,7 @@ import model.trainingModel;
 import view.indexView;
 import view.perceptronView;
 
-/**
- *
- * @author Juan
- */
+
 public class perceptronController implements ActionListener {
 
     private perceptronView view;
@@ -119,7 +111,7 @@ public class perceptronController implements ActionListener {
         }
         boolean exist = false;
         while (!exist) {
-            setGate = JOptionPane.showInputDialog(null, "Ingrese el nombre de la compuerta").toUpperCase();
+            setGate = JOptionPane.showInputDialog(null, "Ingrese el nombre de la compuerta.\nPuede ser: AND, OR, NAND, NOR").toUpperCase();
             exist = Arrays.stream(checkGate).anyMatch(setGate::equals);
 
             if (!exist) {
